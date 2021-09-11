@@ -51,7 +51,7 @@ main h3 {
     margin-bottom: 40px;
 }
 
-#questions {
+#questionsDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,7 +72,7 @@ li {
 #choiceList, li:hover {
     opacity: 70%;
 }
-#startTime {
+#startQuiz {
     color:blanchedalmond;
     font-size: 1rem;
     font-weight: bolder;
