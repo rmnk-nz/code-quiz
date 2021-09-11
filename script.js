@@ -1,4 +1,11 @@
 
+// decleared variables
+var questionsDiv = document.querySelector("#questionsDiv");
+var timerDisplay = document.querySelector("#timer");
+var choiceList = document.querySelector("#choiceList");
+var startBtn = document.querySelector("#startQuiz");
+
+
 // object for each question with array to list the choices and answer
 var questionsOne = {
     question: "How do you declare a JavaScript variable?",
@@ -28,30 +35,28 @@ var questionFour = {
 var timeScore = 0;
 var questionScore = 0;
 
+// variables for timer
+var secondsLeft = 6;
+var timerPenalty = 10;
+var timerInterval; 
+
 //function to start timer and display to user
-function start() {
-    timerInterval = setInterval(function() {
+ function start() {
+    var timerInterval = setInterval(function() {
         secondsLeft--;
         timerDisplay.textContent = secondsLeft;
 
         if(secondsLeft === 0) {
-            clearInterval(timerInterval); 
+            clearInterval(timerInterval);
+            timerDisplay.textContent = "TIMES UP"; 
         }
 
     }, 1000);
-}
-// variables for timer
-var secondsLeft = 61;
-var timerPenalty = 10;
-var timerInterval; 
+};
 
 // when clicked timer will start
 startBtn.addEventListener("click", start);
 
-// decleared variables
-var questionsDiv = document.querySelector("#questionsDiv");
-var timerDisplay = document.querySelector("#timer");
-var choiceList = document.querySelector("#choiceList");
-var startBtn = document.querySelector("#startQuiz");
+
 
 
