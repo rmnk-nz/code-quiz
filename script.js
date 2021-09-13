@@ -28,9 +28,14 @@ var questionFour = {
     answer: "(intialize; test; increment)"
     };
 
+var currentQuestion = 0;
+var questions = [
+    questionOne,
+    questionTwo
+];
 
 // variables for timer
-var timerLimit = 61;
+var timerLimit = 41;
 var timerPenalty = 10; 
 var timerInterval = 0;
 
@@ -45,8 +50,9 @@ var timerInterval = 0;
 
             if (timerLimit <= 0) {
                 clearInterval(timerInterval);
-                endQuiz();
                 timerDisplay.textContent = "TIMES UP"; 
+                endQuiz();
+                
             } 
         }, 1000);
     }
@@ -179,13 +185,11 @@ function generateQuestionFour() {
     }
 }
 
-
 function endQuiz() {
     //clear all information
     timerDisplay.innerHTML = "";
     questionsDiv.innerHTML = "";
     optionList.innerHTML = "";
-    resultDiv.innerHTML = "";
     //create headings 
     var completeQuiz = document.createElement("h1");
     completeQuiz.textContent = "Quiz Complete"
@@ -199,8 +203,16 @@ function endQuiz() {
         var timeRemain = timerLimit;
         clearInterval(timerInterval);
         finalScore.textContent = "Final score: " + timeRemain;
-    }
+    } else {
+        finalScore.textContent = "Exceeded Time Limit: Fail"
+    };
 
+    // submit button
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("id", "startBtn");
+    createSubmit.textContent = "Submit";
+
+    questionsDiv.appendChild(createSubmit);
 }
 
 // when clicked timer will start
