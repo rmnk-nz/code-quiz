@@ -77,6 +77,7 @@ li {
     border-radius: 15px;
     background-color:cornflowerblue; 
     list-style: none;
+    cursor: pointer;
 }
 
 #startBtn {
@@ -87,6 +88,7 @@ li {
     background-color:chartreuse;
     padding: 10px 30px 10px 30px;
     border-radius: 10%;
+    cursor: pointer;
 }
 
 #resetScore {
@@ -97,4 +99,5 @@ li {
     background-color:crimson;
     padding: 10px 30px 10px 30px;
     border-radius: 10%;
+    cursor: pointer;
 }

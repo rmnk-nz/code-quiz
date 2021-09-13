@@ -4,7 +4,7 @@ var questionsDiv = document.querySelector("#questionsDiv");
 var timerDisplay = document.querySelector("#timerDisplay");
 var optionList = document.querySelector("#optionList");
 var startBtn = document.querySelector("#startBtn");
-
+var resultDiv = document.querySelector("#resultDiv");
 
 // Objects to hold each question, [options] and answers
 var questionOne = {
@@ -17,7 +17,7 @@ var questionTwo = {
     options: ["curly brackets", "quotes", "parenthesis"],
     answer: "quotes"
     };
-var quetionThree = {
+var questionThree = {
     question: "What statement supplies the value of the function?",
     options: ["result", "valueOf", "return"],
     answer: "return"
@@ -28,11 +28,9 @@ var questionFour = {
     answer: "(intialize; test; increment)"
     };
 
-// variables for score
-var timeScore = 0;
 
 // variables for timer
-var timerLimit = 6;
+var timerLimit = 61;
 var timerPenalty = 10; 
 var timerInterval = 0;
 
@@ -70,20 +68,125 @@ function generateQuestionOne() {
         listItem.textContent = newlist;
         optionList.appendChild(listItem);
         listItem.addEventListener("click", (compare));
-        console.log(listItem);
     });
     //compare userOption with answer
-    function compare(){
+    function compare(option) {
+        var selection = option.target;
 
+        if (selection.matches("li")) {
+            //apply penalty if incorrect else move to next question
+            if (selection.textContent == questionOne.answer) {
+                resultDiv.textContent = "correct!"
+            } else {
+                timerLimit = timerLimit - timerPenalty;
+                resultDiv.textContent = "wrong! -10sec"
+            }
+        } generateQuestionTwo();
     }
-    //apply penalty if incorrect else move to next question
 }
-
-function endQuiz() {
+function generateQuestionTwo() {
+    //clear questionDiv to display question
     questionsDiv.innerHTML = "";
     optionList.innerHTML = "";
+    var userQuestion = questionTwo.question;
+    var userOptions = questionTwo.options;
+    
+    questionsDiv.textContent = userQuestion;
+    
+    //display options for user to select
+    userOptions.forEach(function(newlist) {
+        var listItem = document.createElement("li");
+        listItem.textContent = newlist;
+        optionList.appendChild(listItem);
+        listItem.addEventListener("click", (compare));
+    });
+    //compare userOption with answer
+    function compare(option) {
+        var selection = option.target;
 
-    //create heading 
+        if (selection.matches("li")) {
+            //apply penalty if incorrect else move to next question
+            if (selection.textContent == questionTwo.answer) {
+                resultDiv.textContent = "correct!"
+            } else {
+                timerLimit = timerLimit - timerPenalty;
+                resultDiv.textContent = "wrong! -10sec"
+            }
+        } generateQuestionThree();
+    }
+}
+
+function generateQuestionThree() {
+    //clear questionDiv to display question
+    questionsDiv.innerHTML = "";
+    optionList.innerHTML = "";
+    var userQuestion = questionThree.question;
+    var userOptions = questionThree.options;
+    
+    questionsDiv.textContent = userQuestion;
+    
+    //display options for user to select
+    userOptions.forEach(function(newlist) {
+        var listItem = document.createElement("li");
+        listItem.textContent = newlist;
+        optionList.appendChild(listItem);
+        listItem.addEventListener("click", (compare));
+    });
+    //compare userOption with answer
+    function compare(option) {
+        var selection = option.target;
+
+        if (selection.matches("li")) {
+            //apply penalty if incorrect else move to next question
+            if (selection.textContent == questionThree.answer) {
+                resultDiv.textContent = "correct!"
+            } else {
+                timerLimit = timerLimit - timerPenalty;
+                resultDiv.textContent = "wrong! -10sec"
+            }
+        } generateQuestionFour();
+    }
+}
+function generateQuestionFour() {
+    //clear questionDiv to display question
+    questionsDiv.innerHTML = "";
+    optionList.innerHTML = "";
+    var userQuestion = questionFour.question;
+    var userOptions = questionFour.options;
+    
+    questionsDiv.textContent = userQuestion;
+    
+    //display options for user to select
+    userOptions.forEach(function(newlist) {
+        var listItem = document.createElement("li");
+        listItem.textContent = newlist;
+        optionList.appendChild(listItem);
+        listItem.addEventListener("click", (compare));
+    });
+    //compare userOption with answer
+    function compare(option) {
+        var selection = option.target;
+
+        if (selection.matches("li")) {
+            //apply penalty if incorrect else move to next question
+            if (selection.textContent == questionFour.answer) {
+                resultDiv.textContent = "correct!"
+            } else {
+                timerLimit = timerLimit - timerPenalty;
+                resultDiv.textContent = "wrong! -10sec"
+            }
+        } endQuiz();
+    }
+}
+
+
+function endQuiz() {
+    //clear all information
+    timerDisplay.innerHTML = "";
+    questionsDiv.innerHTML = "";
+    optionList.innerHTML = "";
+    resultDiv.innerHTML = "";
+    //create headings 
     var completeQuiz = document.createElement("h1");
     completeQuiz.textContent = "Quiz Complete"
     questionsDiv.appendChild(completeQuiz);
