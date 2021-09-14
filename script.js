@@ -184,32 +184,13 @@ function generateQuestionFour() {
         } endQuiz();
     }
 }
-//save and keep track of High scores
-function generateHighScores () {
-    //clear all information
-    timerDisplay.innerHTML = "";
-    optionList.innerHTML = "";
-    resultDiv.innerHTML = "";
 
-    questionsDiv.textContent = "**High Scores**";
-    mainTitle.textContent = "Code Quiz";
-
-    mainTitle.addEventListener("click", function () {
-        window.location.replace("./index.html");
-    });
-    //Reset button to clear data of all existing High scores
-    var createResetBtn = document.createElement("button");
-    createResetBtn.setAttribute("id", "resetScore");
-    createResetBtn.textContent = "Reset";
-
-    resultDiv.appendChild(createResetBtn);
-    
-}
 function endQuiz() {
     //clear all information
     timerDisplay.innerHTML = "";
     questionsDiv.innerHTML = "";
     optionList.innerHTML = "";
+
     //create headings 
     var completeQuiz = document.createElement("h1");
     completeQuiz.textContent = "Quiz Completed"
@@ -263,11 +244,48 @@ function endQuiz() {
     submitScore.addEventListener("click", function () {
         var userInitials = addInitials.value;
 
-        
+      if (userInitials === null) {
+        console.log("Nothing enetered");
 
+        } else {
+        var userScore = {
+            initials: userInitials,
+            score: timeRemain
+        }
+        console.log(userScore);
+        var savedScores = localStorage.getItem("savedScores");
+            if (savedScores === null) {
+            savedScores = [];
 
-    })
+             } else {
+            savedScores = JSON.parse(savedScores);
+             }
+            savedScores.push(userScore);
+            var addScore = JSON.stringify(savedScores);
+            localStorage.setItem("savedScores", addScore);
+            } generateHighScores();
+    }); 
 
+}
 
-};
+//save and keep track of High scores
+function generateHighScores () {
+    //clear all information
+    timerDisplay.innerHTML = "";
+    optionList.innerHTML = "";
+    resultDiv.innerHTML = "";
 
+    questionsDiv.textContent = "**High Scores**";
+    mainTitle.textContent = "Code Quiz";
+
+    mainTitle.addEventListener("click", function () {
+        window.location.replace("./index.html");
+    });
+    //Reset button to clear data of all existing High scores
+    var createResetBtn = document.createElement("button");
+    createResetBtn.setAttribute("id", "resetScore");
+    createResetBtn.textContent = "Reset";
+
+    resultDiv.appendChild(createResetBtn);
+    
+}
