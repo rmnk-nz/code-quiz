@@ -240,7 +240,7 @@ function endQuiz() {
 
     questionsDiv.appendChild(submitScore);
     
-    //save score to local storage and direct user to High Score page
+    //save score to local storage and direct user to High Score function
     submitScore.addEventListener("click", function () {
         var userInitials = addInitials.value;
 
@@ -263,29 +263,51 @@ function endQuiz() {
             savedScores.push(userScore);
             var addScore = JSON.stringify(savedScores);
             localStorage.setItem("savedScores", addScore);
+            
             } generateHighScores();
     }); 
 
 }
 
-//save and keep track of High scores
+//View and clear existing High scores
 function generateHighScores () {
     //clear all information
     timerDisplay.innerHTML = "";
     optionList.innerHTML = "";
     resultDiv.innerHTML = "";
 
+    //High Score headings
     questionsDiv.textContent = "**High Scores**";
-    mainTitle.textContent = "Code Quiz";
+    mainTitle.textContent = "RUN QUIZ";
 
+    //Event Listner to go run quiz again
     mainTitle.addEventListener("click", function () {
         window.location.replace("./index.html");
     });
-    //Reset button to clear data of all existing High scores
-    var createResetBtn = document.createElement("button");
-    createResetBtn.setAttribute("id", "resetScore");
-    createResetBtn.textContent = "Reset";
 
-    resultDiv.appendChild(createResetBtn);
-    
-}
+    // Retreives local stroage 
+    var allScores = localStorage.getItem("savedScores");
+    allScores = JSON.parse(allScores);
+
+    if (allScores !== null) {
+
+        for (var i = 0; i < allScores.length; i++) {
+
+        var createLi = document.createElement("li");
+        createLi.textContent = allScores[i].initials + " " + allScores[i].score;
+        optionList.appendChild(createLi);
+
+        }
+         //Reset button to clear data of all existing High scores
+         var createResetBtn = document.createElement("button");
+         createResetBtn.setAttribute("id", "resetScore");
+        createResetBtn.textContent = "Reset";
+
+        resultDiv.appendChild(createResetBtn);
+        // Event listener to clear scores 
+         createResetBtn.addEventListener("click", function () {
+        localStorage.clear();
+        generateHighScores();
+        });
+    }
+}   
