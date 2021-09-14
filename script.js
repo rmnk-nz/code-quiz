@@ -34,6 +34,11 @@ var timerLimit = 41;
 var timerPenalty = 10; 
 var timerInterval = 0;
 
+// when clicked timer will start
+startBtn.addEventListener("click", start);
+// when clicked will take you to show high scores saved
+mainTitle.addEventListener("click", generateHighScores);
+
 
 //function to start timer and display to user
  function start() {
@@ -54,12 +59,7 @@ var timerInterval = 0;
     generateQuestionOne();   
 };
 
-// when clicked timer will start
-startBtn.addEventListener("click", start);
-// when clicked will take you to show high scores saved
-mainTitle.addEventListener("click", generateHighScores);
-
-//function to generate question
+//functions to generate questions
 function generateQuestionOne() {
     //clear questionDiv to display question
     questionsDiv.innerHTML = "";
@@ -90,6 +90,7 @@ function generateQuestionOne() {
         } generateQuestionTwo();
     }
 }
+
 function generateQuestionTwo() {
     //clear questionDiv to display question
     questionsDiv.innerHTML = "";
@@ -153,6 +154,7 @@ function generateQuestionThree() {
         } generateQuestionFour();
     }
 }
+
 function generateQuestionFour() {
     //clear questionDiv to display question
     questionsDiv.innerHTML = "";
@@ -185,6 +187,7 @@ function generateQuestionFour() {
     }
 }
 
+//once last question is answered direct user to sumbit final score
 function endQuiz() {
     //clear all information
     timerDisplay.innerHTML = "";
@@ -263,13 +266,13 @@ function endQuiz() {
             savedScores.push(userScore);
             var addScore = JSON.stringify(savedScores);
             localStorage.setItem("savedScores", addScore);
-            
+
             } generateHighScores();
     }); 
 
 }
 
-//View and clear existing High scores
+//function to view or clear existing High scores
 function generateHighScores () {
     //clear all information
     timerDisplay.innerHTML = "";
@@ -285,7 +288,7 @@ function generateHighScores () {
         window.location.replace("./index.html");
     });
 
-    // Retreives local stroage 
+    // Retreives local stroage and list all sumbitted/saved scores
     var allScores = localStorage.getItem("savedScores");
     allScores = JSON.parse(allScores);
 
