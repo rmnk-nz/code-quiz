@@ -5,6 +5,7 @@ var timerDisplay = document.querySelector("#timerDisplay");
 var optionList = document.querySelector("#optionList");
 var startBtn = document.querySelector("#startBtn");
 var resultDiv = document.querySelector("#resultDiv");
+var mainTitle = document.querySelector("#mainTitle")
 
 // Objects to hold each question, [options] and answers
 var questionOne = {
@@ -14,7 +15,7 @@ var questionOne = {
     };
 var questionTwo = {
     question:"String values must be enclosed within ____ when being assigned to variables.",
-    options: ["curly brackets", "quotes", "parenthesis"],
+    options: ["commas", "quotes", "parenthesis"],
     answer: "quotes"
     };
 var questionThree = {
@@ -55,6 +56,8 @@ var timerInterval = 0;
 
 // when clicked timer will start
 startBtn.addEventListener("click", start);
+// when clicked will take you to show high scores saved
+mainTitle.addEventListener("click", generateHighScores);
 
 //function to generate question
 function generateQuestionOne() {
@@ -181,7 +184,27 @@ function generateQuestionFour() {
         } endQuiz();
     }
 }
+//save and keep track of High scores
+function generateHighScores () {
+    //clear all information
+    timerDisplay.innerHTML = "";
+    optionList.innerHTML = "";
+    resultDiv.innerHTML = "";
 
+    questionsDiv.textContent = "**High Scores**";
+    mainTitle.textContent = "Code Quiz";
+
+    mainTitle.addEventListener("click", function () {
+        window.location.replace("./index.html");
+    });
+    //Reset button to clear data of all existing High scores
+    var createResetBtn = document.createElement("button");
+    createResetBtn.setAttribute("id", "resetScore");
+    createResetBtn.textContent = "Reset";
+
+    resultDiv.appendChild(createResetBtn);
+    
+}
 function endQuiz() {
     //clear all information
     timerDisplay.innerHTML = "";
@@ -223,11 +246,11 @@ function endQuiz() {
     questionsDiv.appendChild(initialsTitle);
     
     // input for users initials
-    var initialsInput = document.createElement("input");
-    initialsInput.setAttribute("id", "initials");
-    initialsInput.textContent = "";
+    var addInitials = document.createElement("input");
+    addInitials.setAttribute("id", "initials");
+    addInitials.textContent = "";
     
-    questionsDiv.appendChild(initialsInput);
+    questionsDiv.appendChild(addInitials);
     
     // button for submitting user score
     var submitScore = document.createElement("button");
@@ -235,8 +258,12 @@ function endQuiz() {
     submitScore.textContent = "Submit";
 
     questionsDiv.appendChild(submitScore);
-
+    
+    //save score to local storage and direct user to High Score page
     submitScore.addEventListener("click", function () {
+        var userInitials = addInitials.value;
+
+        
 
 
     })
