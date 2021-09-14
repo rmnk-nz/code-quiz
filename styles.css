@@ -89,9 +89,10 @@ li {
     padding: 10px 30px 10px 30px;
     border-radius: 10%;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-#resetScore, #umbit {
+#resetScore {
     color:blanchedalmond;
     font-size: 1rem;
     font-weight: bolder;
@@ -100,4 +101,12 @@ li {
     padding: 10px 30px 10px 30px;
     border-radius: 10%;
     cursor: pointer;
+}
+
+#initials {
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bolder;
 }

@@ -25,14 +25,8 @@ var questionThree = {
 var questionFour = {
     question: "Which of the following is the correct syntax of FOR?",
     options: ["for(test; intialize; increment)", "for(intialize; test; increment)", "for(test; increment; intialize)"],
-    answer: "(intialize; test; increment)"
+    answer: "for(intialize; test; increment)"
     };
-
-var currentQuestion = 0;
-var questions = [
-    questionOne,
-    questionTwo
-];
 
 // variables for timer
 var timerLimit = 41;
@@ -58,6 +52,9 @@ var timerInterval = 0;
     }
     generateQuestionOne();   
 };
+
+// when clicked timer will start
+startBtn.addEventListener("click", start);
 
 //function to generate question
 function generateQuestionOne() {
@@ -192,7 +189,7 @@ function endQuiz() {
     optionList.innerHTML = "";
     //create headings 
     var completeQuiz = document.createElement("h1");
-    completeQuiz.textContent = "Quiz Complete"
+    completeQuiz.textContent = "Quiz Completed"
     questionsDiv.appendChild(completeQuiz);
 
     var finalScore = document.createElement("h2");
@@ -204,16 +201,46 @@ function endQuiz() {
         clearInterval(timerInterval);
         finalScore.textContent = "Final score: " + timeRemain;
     } else {
-        finalScore.textContent = "Exceeded Time Limit: Fail"
-    };
+        finalScore.textContent = "Exceeded Time Limit";
+            // Try Again button
+        var createTryAgain = document.createElement("button");
+        createTryAgain.setAttribute("id", "resetScore");
+        createTryAgain.textContent = "Try Again";
 
-    // submit button
-    var createSubmit = document.createElement("button");
-    createSubmit.setAttribute("id", "startBtn");
-    createSubmit.textContent = "Submit";
+        questionsDiv.appendChild(createTryAgain);
+        //Try again button reloads page
+        createTryAgain.addEventListener("click", function () {
+            window.location.replace("./index.html");
+        });
+        return 
+    }
+    
+    // enter initials title
+    var initialsTitle = document.createElement("label");
+    initialsTitle.setAttribute("id", "createLabel");
+    initialsTitle.textContent = "Enter your initials";
 
-    questionsDiv.appendChild(createSubmit);
-}
+    questionsDiv.appendChild(initialsTitle);
+    
+    // input for users initials
+    var initialsInput = document.createElement("input");
+    initialsInput.setAttribute("id", "initials");
+    initialsInput.textContent = "";
+    
+    questionsDiv.appendChild(initialsInput);
+    
+    // button for submitting user score
+    var submitScore = document.createElement("button");
+    submitScore.setAttribute("id", "startBtn");
+    submitScore.textContent = "Submit";
 
-// when clicked timer will start
-startBtn.addEventListener("click", start);
+    questionsDiv.appendChild(submitScore);
+
+    submitScore.addEventListener("click", function () {
+
+
+    })
+
+
+};
+
