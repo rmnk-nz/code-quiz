@@ -208,8 +208,9 @@ function endQuiz() {
         clearInterval(timerInterval);
         finalScore.textContent = "Final score: " + timeRemain;
     } else {
+        //user exceeded time limit no score is given
         finalScore.textContent = "Exceeded Time Limit";
-            // Try Again button
+        // Try Again button
         var createTryAgain = document.createElement("button");
         createTryAgain.setAttribute("id", "resetScore");
         createTryAgain.textContent = "Try Again";
@@ -288,7 +289,7 @@ function generateHighScores () {
         window.location.replace("./index.html");
     });
 
-    // Retreives local stroage and list all sumbitted/saved scores
+    // Retreives data from local storage and list all sumbitted/saved scores
     var allScores = localStorage.getItem("savedScores");
     allScores = JSON.parse(allScores);
 
