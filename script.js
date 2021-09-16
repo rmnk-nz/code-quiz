@@ -279,6 +279,7 @@ function generateHighScores () {
     timerDisplay.innerHTML = "";
     optionList.innerHTML = "";
     resultDiv.innerHTML = "";
+    clearInterval(timerInterval);
 
     //High Score headings
     questionsDiv.textContent = "**High Scores**";
